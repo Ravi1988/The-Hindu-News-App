@@ -32,7 +32,8 @@
                 app:layout_constraintTop_toTopOf="parent"/>
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <include layout="@layout/network_error_view" />
+        <include layout="@layout/network_error_view"
+                 android:visibility="@{vm.showError ? View.VISIBLE : View.GONE}"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>
