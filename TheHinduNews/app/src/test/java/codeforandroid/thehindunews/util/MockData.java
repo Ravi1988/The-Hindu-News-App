@@ -2,7 +2,6 @@ package codeforandroid.thehindunews.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import codeforandroid.thehindunews.model.News;
 import codeforandroid.thehindunews.model.News.Article;
@@ -15,12 +14,12 @@ public class MockData {
 
 	public static News getMockNews() {
 		News news = new News();
-		news.setArticles((ArrayList<Article>) getArticles());
+		news.setArticles(getArticles());
 		return news;
 	}
 
-	public static List<Article> getArticles() {
-		return Arrays.asList(getArticle(), getArticle(), getArticle());
+	public static ArrayList<Article> getArticles() {
+		return new ArrayList<>(Arrays.asList(getArticle(), getArticle(), getArticle()));
 	}
 
 	public static Article getArticle() {

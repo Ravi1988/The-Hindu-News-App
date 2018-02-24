@@ -13,12 +13,12 @@ import io.reactivex.schedulers.Schedulers;
 public class BaseTest {
 
 	@BeforeClass
-	public void setupRx(){
+	public static void setupRx(){
 		RxAndroidPlugins.setInitMainThreadSchedulerHandler(e -> Schedulers.trampoline());
 	}
 
 	@AfterClass
-	public void tearRx(){
+	public static void tearRx(){
 		RxAndroidPlugins.reset();
 	}
 }

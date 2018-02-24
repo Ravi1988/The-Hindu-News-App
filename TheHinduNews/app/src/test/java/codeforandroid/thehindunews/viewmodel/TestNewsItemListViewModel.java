@@ -1,11 +1,11 @@
 package codeforandroid.thehindunews.viewmodel;
 
-import android.accounts.NetworkErrorException;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.io.IOException;
 
 import codeforandroid.thehindunews.BaseTest;
 import codeforandroid.thehindunews.model.News;
@@ -66,7 +66,7 @@ public class TestNewsItemListViewModel extends BaseTest{
 
 	@Test
 	public void shouldShowErrorIfRequestFailed(){
-		Observable<News> error = Observable.error(new NetworkErrorException());
+		Observable<News> error = Observable.error(new IOException());
 		when(newsitemRepo.getTopStories()).thenReturn(error);
 
 		newsItemViewModel.loadNews();
