@@ -39,9 +39,6 @@ public class NewsItemListViewModel {
 
 
 	public void loadNews(){
-		if(getNewsItem() != null){
-			return;
-		}
 		showProgress();
 		newsItemRepo.getTopStories().subscribe(new Observer<News>() {
 			@Override

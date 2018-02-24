@@ -34,7 +34,7 @@ public class News {
 		this.articles = articles;
 	}
 
-	public class Article {
+	public static class Article {
 
 		private Source source;
 
@@ -107,7 +107,7 @@ public class News {
 		}
 	}
 
-	public class Source {
+	public static class Source {
 
 		private String id;
 

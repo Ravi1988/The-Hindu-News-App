@@ -1,7 +1,5 @@
 package codeforandroid.thehindunews.repo;
 
-import javax.inject.Inject;
-
 import codeforandroid.thehindunews.model.News;
 import codeforandroid.thehindunews.network.TheHinduNewsApiService;
 import io.reactivex.Observable;
@@ -17,7 +15,6 @@ public class NewsItemRepoImpl implements NewsItemRepo{
 
 	private final TheHinduNewsApiService apiService;
 
-	@Inject
 	public NewsItemRepoImpl(TheHinduNewsApiService apiService){
 		this.apiService = apiService;
 	}

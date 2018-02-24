@@ -5,5 +5,5 @@ package codeforandroid.thehindunews.util;
  */
 
 public interface Navigator {
-	void openNewsDetailPage();
+	void openNewsDetailPage(int position);
 }

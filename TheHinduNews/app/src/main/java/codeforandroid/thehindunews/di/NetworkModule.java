@@ -1,6 +1,5 @@
 package codeforandroid.thehindunews.di;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import codeforandroid.thehindunews.network.TheHinduNewsApiService;
@@ -18,7 +17,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 @Module
 public class NetworkModule {
 
-	@Inject
+
 	public NetworkModule(){}
 
 
