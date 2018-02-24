@@ -28,6 +28,7 @@ public class DefaultNavigator implements Navigator{
 		bundle.putInt("position",pos);
 		fragment.setArguments(bundle);
 		transaction.add(R.id.frag_container,fragment,fragment.getClass().getName());
+		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 }

@@ -56,7 +56,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
 	@Override
 	public void onBindViewHolder(NewsViewHolder holder, int position) {
-		holder.bindModel(getData().get(position));
+		holder.bindModel(getData().get(position),position);
 	}
 	@Override
 	public int getItemCount() {
@@ -105,8 +105,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 			binding.setVariable(BR.vm, viewModelArticle);
 		}
 
-		void bindModel(Article article){
+
+
+
+		void bindModel(Article article, int pos){
 			viewModelArticle.setArticle(article);
+			viewModelArticle.setPos(pos);
 			binding.executePendingBindings();
 		}
 

@@ -12,8 +12,12 @@ import android.view.ViewGroup;
 
 import javax.inject.Inject;
 
+import codeforandroid.thehindunews.BR;
 import codeforandroid.thehindunews.R;
+import codeforandroid.thehindunews.TheHinduNewsApp;
 import codeforandroid.thehindunews.databinding.NewsDetailViewBinding;
+import codeforandroid.thehindunews.di.AppComponent;
+import codeforandroid.thehindunews.di.ContextModule;
 import codeforandroid.thehindunews.model.News.Article;
 import codeforandroid.thehindunews.viewmodel.ArticleViewModel;
 import codeforandroid.thehindunews.viewmodel.NewsItemListViewModel;
@@ -37,6 +41,7 @@ public class NewsDetaileFragment extends DialogFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		resolveDependency();
 		pos = getArguments().getInt("position");
 	}
 
@@ -45,7 +50,6 @@ public class NewsDetaileFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 		bind = DataBindingUtil.inflate(inflater,R.layout.news_detail_view,container,false);
-		bind.setVm(articleViewModel);
 		viewModel.getArticles().addOnListChangedCallback(itemChangedListener);
 		viewModel.loadNews();
 		return bind.getRoot();
@@ -56,6 +60,11 @@ public class NewsDetaileFragment extends DialogFragment {
 		super.onViewCreated(view, savedInstanceState);
 	}
 
+	private void resolveDependency() {
+		AppComponent appComponent = ((TheHinduNewsApp)getActivity().getApplication()).getAppComponent();
+		appComponent.plus(new ContextModule(getActivity()))
+				.inject(this);
+	}
 
 	private final ObservableList.OnListChangedCallback<ObservableList<Article>> itemChangedListener = new ObservableList.OnListChangedCallback<ObservableList<Article>>() {
 		@Override
@@ -71,6 +80,7 @@ public class NewsDetaileFragment extends DialogFragment {
 		@Override
 		public void onItemRangeInserted(ObservableList<Article> news, int start, int count) {
 			articleViewModel.setArticle(news.get(pos));
+			bind.setVariable(BR.vm,articleViewModel);
 			bind.executePendingBindings();
 		}
 
