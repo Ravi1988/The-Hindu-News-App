@@ -19,24 +19,25 @@ import codeforandroid.thehindunews.viewmodel.ArticleViewModel;
  * Created by ravi.sharma01 on 2/20/18.
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
+public class NewsAdapter
+		extends
+			RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
 	private final Navigator navigator;
 	private ObservableList<Article> data;
 
 	@Inject
-	public NewsAdapter(Navigator navigator){
-		setHasStableIds(true);
+	public NewsAdapter(Navigator navigator) {
+		// setHasStableIds(true);
 		this.navigator = navigator;
 	}
 
-	@Override
-	public long getItemId(int position) {
-		return getData().get(position).getTitle().hashCode();
-	}
+	// @Override
+	// public long getItemId(int position) {
+	// return getData().get(position).getTitle().hashCode();
+	// }
 
-
-	public void setData(ObservableList<Article> data){
+	public void setData(ObservableList<Article> data) {
 		this.data = data;
 		data.addOnListChangedCallback(itemChangedListener);
 	}
@@ -48,16 +49,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
 	@Override
 	public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		ViewDataBinding binding = DataBindingUtil
-				.inflate(LayoutInflater.from(parent.getContext()), viewType,
-						parent, false);
+		ViewDataBinding binding = DataBindingUtil.inflate(
+				LayoutInflater.from(parent.getContext()), viewType, parent,
+				false);
 		return new NewsViewHolder(binding);
 	}
 
 	@Override
 	public void onBindViewHolder(NewsViewHolder holder, int position) {
-		holder.bindModel(getData().get(position),position);
+		holder.bindModel(getData().get(position), position);
 	}
+
 	@Override
 	public int getItemCount() {
 		return data == null ? 0 : data.size();
@@ -68,32 +70,38 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 	}
 
 	private final ObservableList.OnListChangedCallback<ObservableList<Article>> itemChangedListener = new ObservableList.OnListChangedCallback<ObservableList<Article>>() {
+
 		@Override
 		public void onChanged(ObservableList<Article> news) {
-
+			notifyDataSetChanged();
 		}
 
 		@Override
-		public void onItemRangeChanged(ObservableList<Article> news, int start, int count) {
+		public void onItemRangeChanged(ObservableList<Article> news, int start,
+				int count) {
 			notifyItemRangeChanged(start, count);
 		}
 
 		@Override
-		public void onItemRangeInserted(ObservableList<Article> news, int start, int count) {
+		public void onItemRangeInserted(ObservableList<Article> news, int start,
+				int count) {
 			notifyItemRangeInserted(start, count);
 		}
 
 		@Override
-		public void onItemRangeMoved(ObservableList<Article> news, int i, int i1, int i2) {
+		public void onItemRangeMoved(ObservableList<Article> news,
+				int fromPosition, int toPosition, int itemCount) {
+			notifyDataSetChanged();
 		}
 
 		@Override
-		public void onItemRangeRemoved(ObservableList<Article> news, int start, int count) {
+		public void onItemRangeRemoved(ObservableList<Article> news, int start,
+				int count) {
 			notifyItemRangeRemoved(start, count);
 		}
 	};
 
-	class NewsViewHolder extends RecyclerView.ViewHolder{
+	class NewsViewHolder extends RecyclerView.ViewHolder {
 
 		private final ViewDataBinding binding;
 		private ArticleViewModel viewModelArticle;
@@ -105,13 +113,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 			binding.setVariable(BR.vm, viewModelArticle);
 		}
 
-
-
-
-		void bindModel(Article article, int pos){
+		void bindModel(Article article, int pos) {
 			viewModelArticle.setArticle(article);
 			viewModelArticle.setPos(pos);
-			binding.executePendingBindings();
 		}
 
 	}

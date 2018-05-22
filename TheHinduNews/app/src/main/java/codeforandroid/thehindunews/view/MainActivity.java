@@ -2,11 +2,13 @@ package codeforandroid.thehindunews.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("ActivityLifeCycle","onCreate");
 		super.onCreate(savedInstanceState);
 		resolveDependency();
 		NewsMainViewBinding binding = DataBindingUtil.setContentView(this, R.layout.news_main_view);
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 		setupRv(rvList);
 		SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
 		setupSwipeLayout(refreshLayout);
+
 	}
 
 	private void resolveDependency() {
@@ -61,5 +65,60 @@ public class MainActivity extends AppCompatActivity {
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
 				DividerItemDecoration.VERTICAL);
 		rvList.addItemDecoration(dividerItemDecoration);
+	}
+
+	@Override
+	protected void onStart() {
+		Log.d("ActivityLifeCycle","onStart");
+		super.onStart();
+	}
+
+	@Override
+	protected void onPause() {
+		Log.d("ActivityLifeCycle","onPause");
+		super.onPause();
+	}
+
+	@Override
+	protected void onRestart() {
+		Log.d("ActivityLifeCycle","onRestart");
+		super.onRestart();
+	}
+
+	@Override
+	protected void onResume() {
+		Log.d("ActivityLifeCycle","onResume");
+		super.onResume();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+		Log.d("ActivityLifeCycle","onSaveInstanceState");
+		super.onSaveInstanceState(outState, outPersistentState);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		Log.d("ActivityLifeCycle","onRestoreInstanceState");
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+
+
+	@Override
+	public void onAttachFragment(android.support.v4.app.Fragment fragment) {
+		Log.d("ActivityLifeCycle","onAttachFragment");
+		super.onAttachFragment(fragment);
+	}
+
+	@Override
+	protected void onDestroy() {
+		Log.d("ActivityLifeCycle","onDestroy");
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onStop() {
+		Log.d("ActivityLifeCycle","onStop");
+		super.onStop();
 	}
 }
